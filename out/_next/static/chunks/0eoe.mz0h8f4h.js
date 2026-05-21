@@ -1,0 +1,1 @@
+(globalThis.TURBOPACK||(globalThis.TURBOPACK=[])).push(["object"==typeof document?document.currentScript:void 0,96020,(e,t,r)=>{t.exports=e.r(18920)},31713,e=>{"use strict";var t=e.i(73447),r=e.i(96020);e.s(["default",0,function(){let e=(0,r.useRouter)();return(0,t.useEffect)(()=>{e.replace("/planner")},[e]),null}])}]);

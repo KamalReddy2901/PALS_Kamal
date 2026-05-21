@@ -1,0 +1,291 @@
+@import 'tailwindcss';
+@import 'tw-animate-css';
+
+@custom-variant dark (&:is(.dark *));
+
+/* Urban Heat Island Intelligence System - Design Tokens */
+:root {
+  /* Core palette - exactly 3 colors */
+  --bone: #EDE6D3;          /* Gazetteer Bone - background */
+  --ink: #1A1A1A;           /* Press Black - primary text */
+  --vermillion: #E84E1B;    /* Vermillion Siren - heat accent */
+  --graphite: #5C5C5C;      /* De-emphasized elements */
+  
+  /* Semantic mappings */
+  --background: var(--bone);
+  --foreground: var(--ink);
+  --card: var(--bone);
+  --card-foreground: var(--ink);
+  --popover: var(--bone);
+  --popover-foreground: var(--ink);
+  --primary: var(--ink);
+  --primary-foreground: var(--bone);
+  --secondary: var(--bone);
+  --secondary-foreground: var(--ink);
+  --muted: var(--bone);
+  --muted-foreground: var(--graphite);
+  --accent: var(--vermillion);
+  --accent-foreground: var(--bone);
+  --destructive: var(--vermillion);
+  --destructive-foreground: var(--bone);
+  --border: var(--ink);
+  --input: var(--ink);
+  --ring: var(--ink);
+  
+  /* Charts - single hue vermillion ramp */
+  --chart-1: var(--vermillion);
+  --chart-2: #F17A4D;
+  --chart-3: #F5A67F;
+  --chart-4: #F9D2B1;
+  --chart-5: var(--bone);
+  
+  --radius: 0;
+}
+
+@theme inline {
+  --font-sans: 'JetBrains Mono', monospace;
+  --font-serif: 'Fraunces', serif;
+  --font-display: 'Fraunces', serif;
+  --font-mono: 'JetBrains Mono', monospace;
+  --font-accent: 'Newsreader', serif;
+  
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-destructive-foreground: var(--destructive-foreground);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+  --color-chart-1: var(--chart-1);
+  --color-chart-2: var(--chart-2);
+  --color-chart-3: var(--chart-3);
+  --color-chart-4: var(--chart-4);
+  --color-chart-5: var(--chart-5);
+  
+  /* Custom colors for direct use */
+  --color-bone: #EDE6D3;
+  --color-ink: #1A1A1A;
+  --color-vermillion: #E84E1B;
+  --color-graphite: #5C5C5C;
+  
+  --radius-sm: 0;
+  --radius-md: 0;
+  --radius-lg: 0;
+  --radius-xl: 0;
+}
+
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+  }
+  
+  html {
+    background-color: var(--bone);
+  }
+  
+  body {
+    @apply bg-background text-foreground;
+    font-feature-settings: "tnum" 1;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+}
+
+/* Ruled ledger grid background */
+.ruled-grid {
+  background-image: repeating-linear-gradient(
+    to bottom,
+    transparent,
+    transparent 31px,
+    var(--ink) 31px,
+    var(--ink) 31.5px
+  );
+  background-position: 0 0;
+}
+
+/* Paper grain texture overlay */
+.paper-grain::before {
+  content: '';
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  pointer-events: none;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
+  opacity: 0.03;
+  z-index: 9999;
+}
+
+/* Registration marks */
+.registration-marks::after {
+  content: '+';
+  position: fixed;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 8px;
+  color: var(--graphite);
+  pointer-events: none;
+}
+
+.registration-mark-tl::before,
+.registration-mark-tr::before,
+.registration-mark-bl::after,
+.registration-mark-br::after {
+  content: '+';
+  position: fixed;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 8px;
+  color: var(--graphite);
+  pointer-events: none;
+  z-index: 9999;
+}
+
+/* Typography styles */
+.display-stamp {
+  font-family: 'Fraunces', serif;
+  font-weight: 900;
+  text-transform: uppercase;
+  letter-spacing: -0.02em;
+  font-variation-settings: 'opsz' 144, 'SOFT' 0;
+}
+
+.body-mono {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 13px;
+  line-height: 18px;
+  font-weight: 400;
+}
+
+.annotation-italic {
+  font-family: 'Newsreader', serif;
+  font-style: italic;
+  font-weight: 400;
+}
+
+/* Link underline animation */
+.link-underline {
+  position: relative;
+  text-decoration: none;
+}
+
+.link-underline::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 0;
+  height: 1px;
+  background-color: var(--ink);
+  transition: width 0.12s ease-out;
+}
+
+.link-underline:hover::after {
+  width: 100%;
+}
+
+/* Leaflet overrides for industrial aesthetic */
+.leaflet-container {
+  background: var(--bone) !important;
+  font-family: 'JetBrains Mono', monospace !important;
+}
+
+.leaflet-control-attribution {
+  background: var(--bone) !important;
+  font-family: 'JetBrains Mono', monospace !important;
+  font-size: 10px !important;
+  border-top: 0.5px solid var(--ink) !important;
+}
+
+.leaflet-control-zoom {
+  border: 1px solid var(--ink) !important;
+  border-radius: 0 !important;
+}
+
+.leaflet-control-zoom a {
+  background: var(--bone) !important;
+  color: var(--ink) !important;
+  border-radius: 0 !important;
+  font-family: 'JetBrains Mono', monospace !important;
+}
+
+.leaflet-control-zoom a:hover {
+  background: var(--ink) !important;
+  color: var(--bone) !important;
+}
+
+/* Recharts overrides */
+.recharts-cartesian-axis-tick-value {
+  font-family: 'JetBrains Mono', monospace !important;
+  font-size: 11px !important;
+  fill: var(--graphite) !important;
+}
+
+.recharts-cartesian-grid line {
+  stroke: var(--ink) !important;
+  stroke-width: 0.5 !important;
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--bone);
+  border-left: 0.5px solid var(--ink);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--graphite);
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--ink);
+}
+
+/* Slider styles */
+input[type="range"] {
+  -webkit-appearance: none;
+  appearance: none;
+  background: transparent;
+}
+
+input[type="range"]::-webkit-slider-track {
+  height: 2px;
+  background: var(--ink);
+}
+
+input[type="range"]::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 16px;
+  height: 16px;
+  background: var(--bone);
+  border: 2px solid var(--ink);
+  margin-top: -7px;
+  cursor: pointer;
+}
+
+input[type="range"]::-webkit-slider-thumb:hover {
+  background: var(--vermillion);
+  border-color: var(--vermillion);
+}
+
+/* Vertical writing mode for sidebar labels */
+.writing-mode-vertical {
+  writing-mode: vertical-rl;
+  text-orientation: mixed;
+}
