@@ -64,7 +64,7 @@ The design system is fully custom: three typefaces (Fraunces display, JetBrains 
 ## Running Locally
 
 ```bash
-git clone https://github.com/KamalKumarKasala/PALS_Kamal.git
+git clone https://github.com/KamalReddy2901/PALS_Kamal.git
 cd PALS_Kamal
 pnpm install
 pnpm dev
