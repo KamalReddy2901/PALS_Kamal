@@ -35,7 +35,7 @@ function SummaryKPIs() {
   const wardsAboveThreshold = wardMetrics.filter(m => m.hvs >= 70).length
   
   return (
-    <div className="flex items-center gap-8 py-4 border-b border-ink/20">
+    <div className="flex items-center gap-8 py-4 border-b-2 border-ink/20">
       <div>
         <p className="font-mono text-[10px] uppercase text-graphite mb-1">AVG SURFACE TEMP</p>
         <p className="font-mono text-2xl">
@@ -43,7 +43,7 @@ function SummaryKPIs() {
         </p>
       </div>
       
-      <div className="w-px h-10 bg-ink/20" aria-hidden="true" />
+      <div className="w-px h-10 bg-ink/30" aria-hidden="true" />
       
       <div>
         <p className="font-mono text-[10px] uppercase text-graphite mb-1">HOTTEST WARD</p>
@@ -53,7 +53,7 @@ function SummaryKPIs() {
         <p className="font-mono text-[10px] text-graphite mt-0.5">{hottestWardName.toUpperCase()}</p>
       </div>
       
-      <div className="w-px h-10 bg-ink/20" aria-hidden="true" />
+      <div className="w-px h-10 bg-ink/30" aria-hidden="true" />
       
       <div>
         <p className="font-mono text-[10px] uppercase text-graphite mb-1">WARDS ABOVE THRESHOLD</p>
@@ -68,7 +68,7 @@ function SummaryKPIs() {
       
       <div className="text-right">
         <p className="font-mono text-[10px] uppercase text-graphite mb-1">ACTIVE LENS</p>
-        <p className="font-mono text-sm uppercase">{mapLens}</p>
+        <p className="font-mono text-sm uppercase tracking-wide">{mapLens}</p>
       </div>
     </div>
   )
@@ -84,12 +84,14 @@ function CitySelector() {
       <select
         id="city-select"
         disabled
-        className="font-mono text-[13px] bg-bone border border-ink px-3 py-1.5 cursor-not-allowed opacity-60"
+        className="font-mono text-[13px] bg-bone border-2 border-ink/30 px-3 py-1.5 cursor-not-allowed opacity-60"
         aria-label="City selector - locked to Bengaluru"
       >
         <option>BENGALURU</option>
       </select>
-      <span className="font-mono text-[9px] text-graphite uppercase">(LOCKED)</span>
+      <span className="font-mono text-[9px] text-graphite uppercase border border-graphite/30 px-2 py-0.5">
+        LOCKED
+      </span>
     </div>
   )
 }

@@ -188,7 +188,7 @@ export function InterventionSimulator({
 
       {/* Results panel */}
       <motion.div
-        className="mt-6 p-4 border border-ink bg-ink/[0.02]"
+        className="mt-6 p-4 border-2 border-ink bg-ink/[0.02]"
         animate={{
           borderColor: effect.predicted_delta_c > 0 ? "#E84E1B" : "#1A1A1A",
         }}
@@ -271,7 +271,7 @@ export function InterventionSimulator({
           <button
             onClick={undoSimulator}
             disabled={!canUndo()}
-            className="px-3 py-1.5 font-mono text-[10px] uppercase border border-ink disabled:opacity-30 disabled:cursor-not-allowed hover:bg-ink hover:text-bone transition-colors"
+            className="px-3 py-1.5 font-mono text-[10px] uppercase border-2 border-ink disabled:opacity-30 disabled:cursor-not-allowed hover:bg-ink hover:text-bone transition-all"
             aria-label="Undo last change"
           >
             ← UNDO
@@ -279,7 +279,7 @@ export function InterventionSimulator({
           <button
             onClick={redoSimulator}
             disabled={!canRedo()}
-            className="px-3 py-1.5 font-mono text-[10px] uppercase border border-ink disabled:opacity-30 disabled:cursor-not-allowed hover:bg-ink hover:text-bone transition-colors"
+            className="px-3 py-1.5 font-mono text-[10px] uppercase border-2 border-ink disabled:opacity-30 disabled:cursor-not-allowed hover:bg-ink hover:text-bone transition-all"
             aria-label="Redo last change"
           >
             REDO →
@@ -291,7 +291,7 @@ export function InterventionSimulator({
 
         <button
           onClick={resetSimulator}
-          className="px-3 py-1.5 font-mono text-[10px] uppercase border border-ink hover:bg-ink hover:text-bone transition-colors"
+          className="px-3 py-1.5 font-mono text-[10px] uppercase border-2 border-ink hover:bg-vermillion hover:text-bone hover:border-vermillion transition-all"
           aria-label="Reset all intervention values"
         >
           RESET ALL
@@ -299,11 +299,11 @@ export function InterventionSimulator({
       </div>
 
       {/* Save action */}
-      <div className="mt-4 flex items-center justify-between border-t border-ink/20 pt-4">
+      <div className="mt-4 flex items-center justify-between border-t-2 border-ink/20 pt-4">
         <button
           onClick={handleSave}
           disabled={effect.predicted_delta_c === 0}
-          className="px-4 py-2 font-mono text-[11px] uppercase bg-ink text-bone hover:bg-vermillion transition-colors disabled:opacity-30 disabled:cursor-not-allowed"
+          className="px-4 py-2 font-mono text-[11px] uppercase bg-ink text-bone border-2 border-ink hover:bg-vermillion hover:border-vermillion transition-all disabled:opacity-30 disabled:cursor-not-allowed"
           aria-label="Save this intervention to the tracker"
         >
           SAVE TO INTERVENTIONS TRACKER →
@@ -320,7 +320,7 @@ export function InterventionSimulator({
             </span>
             <Link
               href="/interventions"
-              className="font-mono text-[10px] uppercase text-ink border-b border-ink hover:text-vermillion hover:border-vermillion transition-colors"
+              className="font-mono text-[10px] uppercase text-ink border-b-2 border-ink hover:text-vermillion hover:border-vermillion transition-colors"
               aria-label="View all interventions in the tracker"
             >
               VIEW TRACKER →

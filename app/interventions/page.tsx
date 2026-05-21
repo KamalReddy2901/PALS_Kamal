@@ -66,19 +66,19 @@ function InterventionRow({
         layout: { type: "spring", stiffness: 500, damping: 30 },
         delay: index * 0.05,
       }}
-      className="border-b border-ink/20 hover:bg-ink/[0.02] transition-colors"
+      className="border-b border-ink/20 hover:bg-vermillion/[0.03] transition-colors"
     >
-      <td className="py-4 pr-4">
+      <td className="py-4 px-4">
         <span className="font-mono text-[11px] text-graphite">
           {intervention.id.toUpperCase()}
         </span>
       </td>
-      <td className="py-4 pr-4">
+      <td className="py-4 px-4">
         <span className="font-mono text-[13px] uppercase">
           {ward?.name || intervention.ward_id}
         </span>
       </td>
-      <td className="py-4 pr-4">
+      <td className="py-4 px-4">
         <span className="font-mono text-[12px]">
           {type?.name || intervention.type_id}
         </span>
@@ -86,7 +86,7 @@ function InterventionRow({
           ({intervention.quantity} {type?.unit})
         </span>
       </td>
-      <td className="py-4 pr-4 text-right">
+      <td className="py-4 px-4 text-right">
         <span className="font-mono text-[13px] text-vermillion">
           −
           <MercuryTick
@@ -96,27 +96,27 @@ function InterventionRow({
           />
         </span>
       </td>
-      <td className="py-4 pr-4 text-right">
+      <td className="py-4 px-4 text-right">
         <span className="font-mono text-[13px]">
           <MercuryTickCurrency value={intervention.estimated_cost_inr} />
         </span>
       </td>
-      <td className="py-4 pr-4 text-right">
+      <td className="py-4 px-4 text-right">
         <span
           className={`font-mono text-[13px] ${intervention.roi_score >= 7 ? "text-vermillion" : "text-ink"}`}
         >
           <MercuryTick value={intervention.roi_score} decimals={1} />
         </span>
       </td>
-      <td className="py-4 pr-4">
+      <td className="py-4 px-4">
         <StatusBadge status={intervention.status} />
       </td>
-      <td className="py-4 pr-4">
+      <td className="py-4 px-4">
         <span className="font-mono text-[11px] text-graphite">
           {createdDate}
         </span>
       </td>
-      <td className="py-4">
+      <td className="py-4 px-4">
         <span className="font-accent italic text-[11px] text-graphite truncate block max-w-[120px]">
           {intervention.owner}
         </span>
@@ -140,8 +140,8 @@ function SummaryStats({ filtered }: { filtered: Intervention[] }) {
   };
 
   return (
-    <div className="grid grid-cols-6 gap-6 py-4 border-b border-ink/20 mb-6">
-      <div>
+    <div className="grid grid-cols-6 gap-6 py-4 border-b-2 border-ink/20 mb-6">
+      <div className="border-l-2 border-ink/20 pl-4">
         <p className="font-mono text-[10px] uppercase text-graphite mb-1">
           TOTAL
         </p>
@@ -149,7 +149,7 @@ function SummaryStats({ filtered }: { filtered: Intervention[] }) {
           <MercuryTick value={filtered.length} decimals={0} />
         </p>
       </div>
-      <div>
+      <div className="border-l-2 border-ink/20 pl-4">
         <p className="font-mono text-[10px] uppercase text-graphite mb-1">
           INVESTMENT
         </p>
@@ -157,7 +157,7 @@ function SummaryStats({ filtered }: { filtered: Intervention[] }) {
           <MercuryTickCurrency value={totalCost} />
         </p>
       </div>
-      <div>
+      <div className="border-l-2 border-vermillion/30 pl-4">
         <p className="font-mono text-[10px] uppercase text-graphite mb-1">
           PROJ. COOLING
         </p>
@@ -165,7 +165,7 @@ function SummaryStats({ filtered }: { filtered: Intervention[] }) {
           −<MercuryTick value={totalCooling} decimals={2} suffix="°C" />
         </p>
       </div>
-      <div>
+      <div className="border-l-2 border-ink/20 pl-4">
         <p className="font-mono text-[10px] uppercase text-graphite mb-1">
           AVG ROI
         </p>
@@ -173,7 +173,7 @@ function SummaryStats({ filtered }: { filtered: Intervention[] }) {
           <MercuryTick value={avgRoi} decimals={1} />
         </p>
       </div>
-      <div>
+      <div className="border-l-2 border-ink/20 pl-4">
         <p className="font-mono text-[10px] uppercase text-graphite mb-1">
           BY STATUS
         </p>
@@ -183,7 +183,7 @@ function SummaryStats({ filtered }: { filtered: Intervention[] }) {
           <span className="text-ink">{byStatus.executed}E</span>
         </div>
       </div>
-      <div>
+      <div className="border-l-2 border-ink/20 pl-4">
         <p className="font-mono text-[10px] uppercase text-graphite mb-1">
           WARDS
         </p>
@@ -284,13 +284,13 @@ function NewInterventionSheet({
         aria-label="New intervention form"
       >
         {/* Sheet header */}
-        <div className="flex-shrink-0 h-14 bg-ink text-bone flex items-center justify-between px-4 border-b border-ink">
+        <div className="flex-shrink-0 h-14 bg-ink text-bone flex items-center justify-between px-4 border-b-2 border-ink">
           <span className="font-mono text-[11px] uppercase tracking-wide">
             NEW INTERVENTION / SHEET {String(sheetNum).padStart(2, "0")}
           </span>
           <button
             onClick={onClose}
-            className="font-mono text-[11px] uppercase text-bone/60 hover:text-bone transition-colors"
+            className="font-mono text-[11px] uppercase text-bone/60 hover:text-vermillion transition-colors"
             aria-label="Close sheet"
           >
             [ESC] CLOSE
@@ -298,7 +298,7 @@ function NewInterventionSheet({
         </div>
 
         {/* Sheet margin annotation */}
-        <div className="flex-shrink-0 px-4 pt-2 pb-1 border-b border-ink/20">
+        <div className="flex-shrink-0 px-4 pt-2 pb-1 border-b-2 border-ink/20">
           <p className="font-accent italic text-[10px] text-graphite">
             REV. A — {today} &nbsp;·&nbsp; PROPOSED INTERVENTION LOG
           </p>
@@ -314,7 +314,7 @@ function NewInterventionSheet({
             <select
               value={wardId}
               onChange={(e) => setWardId(e.target.value)}
-              className="w-full px-3 py-2 font-mono text-[13px] bg-bone border border-ink focus:outline-none focus:border-vermillion transition-colors"
+              className="w-full px-3 py-2 font-mono text-[13px] bg-bone border-2 border-ink focus:outline-none focus:border-vermillion transition-all cursor-pointer"
               aria-label="Select ward"
             >
               {wards.map((w) => (
@@ -340,10 +340,10 @@ function NewInterventionSheet({
                     setTypeId(t.id);
                     setQuantity(0);
                   }}
-                  className={`flex-1 py-2 px-2 font-mono text-[10px] uppercase border transition-colors ${
+                  className={`flex-1 py-2 px-2 font-mono text-[10px] uppercase border-2 transition-all ${
                     typeId === t.id
                       ? "bg-ink text-bone border-ink"
-                      : "bg-bone text-ink border-ink/40 hover:border-ink"
+                      : "bg-bone text-ink border-ink/40 hover:border-ink hover:bg-ink/5"
                   }`}
                 >
                   {t.id === "trees"
@@ -393,14 +393,14 @@ function NewInterventionSheet({
               value={owner}
               onChange={(e) => setOwner(e.target.value)}
               placeholder="e.g. Ward Commissioner"
-              className="w-full px-3 py-2 font-mono text-[13px] bg-bone border border-ink focus:outline-none focus:border-vermillion transition-colors placeholder:text-graphite/50"
+              className="w-full px-3 py-2 font-mono text-[13px] bg-bone border-2 border-ink focus:outline-none focus:border-vermillion transition-all placeholder:text-graphite/50"
               aria-label="Responsible officer name"
             />
           </fieldset>
 
           {/* Live projection */}
           <div
-            className="border border-ink p-4 bg-ink/[0.02]"
+            className="border-2 border-ink p-4 bg-ink/[0.02]"
             aria-live="polite"
           >
             <p className="font-mono text-[10px] uppercase text-graphite mb-3">
@@ -446,7 +446,7 @@ function NewInterventionSheet({
         </div>
 
         {/* Submit */}
-        <div className="flex-shrink-0 p-6 border-t border-ink/20">
+        <div className="flex-shrink-0 p-6 border-t-2 border-ink/20">
           {saved ? (
             <motion.p
               initial={{ opacity: 0, y: 4 }}
@@ -460,7 +460,7 @@ function NewInterventionSheet({
             <button
               onClick={handleSubmit}
               disabled={quantity === 0}
-              className="w-full py-3 font-mono text-[12px] uppercase bg-ink text-bone hover:bg-vermillion transition-colors disabled:opacity-30 disabled:cursor-not-allowed"
+              className="w-full py-3 font-mono text-[12px] uppercase bg-ink text-bone border-2 border-ink hover:bg-vermillion hover:border-vermillion transition-all disabled:opacity-30 disabled:cursor-not-allowed"
               aria-label="Log this intervention to the tracker"
             >
               LOG INTERVENTION →
@@ -538,7 +538,7 @@ export default function InterventionsPage() {
           <SummaryStats filtered={filtered} />
 
           {/* Filters + controls */}
-          <div className="flex items-center justify-between mb-6">
+          <div className="flex items-center justify-between mb-6 pb-4 border-b-2 border-ink/20">
             <div className="flex items-center gap-6">
               <div className="flex items-center gap-2">
                 <span className="font-mono text-[10px] uppercase text-graphite">
@@ -554,10 +554,10 @@ export default function InterventionsPage() {
                       key={f.id}
                       onClick={() => setStatusFilter(f.id)}
                       aria-pressed={statusFilter === f.id}
-                      className={`px-3 py-1.5 font-mono text-[10px] uppercase border transition-colors ${
+                      className={`px-3 py-1.5 font-mono text-[10px] uppercase border-2 transition-all ${
                         statusFilter === f.id
                           ? "bg-ink text-bone border-ink"
-                          : "bg-bone text-ink border-ink/30 hover:border-ink"
+                          : "bg-bone text-ink border-ink/30 hover:border-ink hover:bg-ink/5"
                       }`}
                     >
                       {f.label}
@@ -573,7 +573,7 @@ export default function InterventionsPage() {
                 <select
                   value={sortBy}
                   onChange={(e) => setSortBy(e.target.value as typeof sortBy)}
-                  className="px-3 py-1.5 font-mono text-[11px] bg-bone border border-ink/30 focus:outline-none focus:border-ink"
+                  className="px-3 py-1.5 font-mono text-[11px] bg-bone border-2 border-ink/30 hover:border-ink focus:outline-none focus:border-vermillion transition-colors cursor-pointer"
                   aria-label="Sort interventions by"
                 >
                   <option value="date">DATE (NEWEST)</option>
@@ -585,7 +585,7 @@ export default function InterventionsPage() {
 
             <button
               onClick={() => setShowNewForm(true)}
-              className="px-4 py-2 font-mono text-[11px] uppercase bg-ink text-bone hover:bg-vermillion transition-colors"
+              className="px-4 py-2 font-mono text-[11px] uppercase bg-ink text-bone border-2 border-ink hover:bg-vermillion hover:border-vermillion transition-all"
               aria-label="Log a new intervention"
             >
               + NEW INTERVENTION
@@ -593,9 +593,9 @@ export default function InterventionsPage() {
           </div>
 
           {/* Table */}
-          <div className="overflow-x-auto">
+          <div className="overflow-x-auto border-2 border-ink">
             <table className="w-full">
-              <thead>
+              <thead className="bg-ink/[0.02]">
                 <tr className="border-b-2 border-ink">
                   {[
                     "ID",
@@ -610,7 +610,7 @@ export default function InterventionsPage() {
                   ].map((h) => (
                     <th
                       key={h}
-                      className={`py-3 pr-4 font-mono text-[10px] uppercase text-graphite ${
+                      className={`py-3 px-4 font-mono text-[10px] uppercase text-graphite ${
                         ["ΔT", "COST", "ROI"].includes(h)
                           ? "text-right"
                           : "text-left"
@@ -623,31 +623,30 @@ export default function InterventionsPage() {
               </thead>
               <tbody>
                 <AnimatePresence mode="popLayout">
-                  {filtered.map((intervention, index) => (
-                    <InterventionRow
-                      key={intervention.id}
-                      intervention={intervention}
-                      index={index}
-                    />
-                  ))}
+                  {filtered.length > 0 ? (
+                    filtered.map((intervention, index) => (
+                      <InterventionRow
+                        key={intervention.id}
+                        intervention={intervention}
+                        index={index}
+                      />
+                    ))
+                  ) : (
+                    <tr>
+                      <td colSpan={9} className="py-20 pl-8">
+                        <p className="font-serif font-black italic text-3xl text-ink/30 leading-tight max-w-md">
+                          No interventions match this filter.
+                        </p>
+                        <p className="font-accent italic text-[13px] text-graphite mt-4">
+                          Try selecting a different status or logging a new intervention above.
+                        </p>
+                      </td>
+                    </tr>
+                  )}
                 </AnimatePresence>
               </tbody>
             </table>
           </div>
-
-          {filtered.length === 0 && (
-            <div className="py-16 pl-0">
-              <p className="font-serif font-black italic text-2xl text-ink/30 leading-tight">
-                No interventions
-                <br />
-                match this filter.
-              </p>
-              <p className="font-accent italic text-[12px] text-graphite mt-3">
-                Try selecting a different status or logging a new intervention
-                above.
-              </p>
-            </div>
-          )}
 
           <footer className="mt-8 pt-4 border-t border-ink/20">
             <Annotation>

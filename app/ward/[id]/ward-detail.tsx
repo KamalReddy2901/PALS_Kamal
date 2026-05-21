@@ -74,7 +74,7 @@ export default function WardPage({ params }: WardPageProps) {
           <nav className="mb-4">
             <Link
               href="/planner"
-              className="font-mono text-[11px] uppercase text-graphite hover:text-ink transition-colors inline-flex items-center gap-2"
+              className="font-mono text-[11px] uppercase text-graphite hover:text-ink border-b border-graphite/30 hover:border-ink transition-all inline-flex items-center gap-2"
               aria-label="Back to city overview"
             >
               ← BACK TO CITY OVERVIEW
@@ -82,7 +82,7 @@ export default function WardPage({ params }: WardPageProps) {
           </nav>
 
           {/* Ward header */}
-          <header className="mb-8 border-b border-ink/20 pb-6">
+          <header className="mb-8 border-b-2 border-ink/20 pb-6">
             <div className="flex items-start justify-between">
               <div>
                 <SectionStamp>{ward.name}</SectionStamp>
@@ -102,7 +102,7 @@ export default function WardPage({ params }: WardPageProps) {
               </div>
 
               {/* HVS score - large display */}
-              <div className="text-right">
+              <div className="text-right border-2 border-ink p-4 bg-bone">
                 <p className="font-mono text-[10px] uppercase text-graphite mb-1">
                   HEAT VULNERABILITY SCORE
                 </p>
@@ -165,9 +165,9 @@ export default function WardPage({ params }: WardPageProps) {
           </div>
 
           {/* Quick stats row */}
-          <section className="mt-8 pt-6 border-t border-ink/20">
+          <section className="mt-8 pt-6 border-t-2 border-ink/20">
             <div className="grid grid-cols-6 gap-4">
-              <div>
+              <div className="border-l-2 border-ink/20 pl-3">
                 <p className="font-mono text-[10px] uppercase text-graphite">
                   AVG LST
                 </p>
@@ -179,7 +179,7 @@ export default function WardPage({ params }: WardPageProps) {
                   />
                 </p>
               </div>
-              <div>
+              <div className="border-l-2 border-vermillion/30 pl-3">
                 <p className="font-mono text-[10px] uppercase text-graphite">
                   PEAK LST
                 </p>
@@ -191,7 +191,7 @@ export default function WardPage({ params }: WardPageProps) {
                   />
                 </p>
               </div>
-              <div>
+              <div className="border-l-2 border-ink/20 pl-3">
                 <p className="font-mono text-[10px] uppercase text-graphite">
                   NDVI
                 </p>
@@ -199,7 +199,7 @@ export default function WardPage({ params }: WardPageProps) {
                   <MercuryTick value={metrics.ndvi} decimals={2} />
                 </p>
               </div>
-              <div>
+              <div className="border-l-2 border-ink/20 pl-3">
                 <p className="font-mono text-[10px] uppercase text-graphite">
                   IMPERVIOUS
                 </p>
@@ -211,7 +211,7 @@ export default function WardPage({ params }: WardPageProps) {
                   />
                 </p>
               </div>
-              <div>
+              <div className="border-l-2 border-ink/20 pl-3">
                 <p className="font-mono text-[10px] uppercase text-graphite">
                   ALBEDO
                 </p>
@@ -219,7 +219,7 @@ export default function WardPage({ params }: WardPageProps) {
                   <MercuryTick value={metrics.albedo_avg} decimals={2} />
                 </p>
               </div>
-              <div>
+              <div className="border-l-2 border-ink/20 pl-3">
                 <p className="font-mono text-[10px] uppercase text-graphite">
                   BLDG DENSITY
                 </p>
@@ -246,7 +246,7 @@ export default function WardPage({ params }: WardPageProps) {
                 {interventions.map((intervention) => (
                   <motion.div
                     key={intervention.id}
-                    className="flex items-center justify-between py-2 border-b border-ink/10"
+                    className="flex items-center justify-between py-3 px-3 border-b border-ink/10 hover:bg-vermillion/[0.03] transition-all"
                     initial={{ opacity: 0, x: -10 }}
                     animate={{ opacity: 1, x: 0 }}
                   >
@@ -272,7 +272,7 @@ export default function WardPage({ params }: WardPageProps) {
                       </span>
                     </div>
                     <div className="flex items-center gap-4">
-                      <span className="font-mono text-[11px] text-graphite">
+                      <span className="font-mono text-[11px] text-vermillion">
                         −{intervention.predicted_delta_c.toFixed(2)}°C
                       </span>
                       <span className="font-mono text-[11px]">

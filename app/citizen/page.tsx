@@ -73,7 +73,7 @@ function WardLookup({ onSelect }: { onSelect: (wardId: string) => void }) {
         onFocus={() => setIsOpen(true)}
         onBlur={() => setTimeout(() => setIsOpen(false), 150)}
         placeholder="e.g., Koramangala, Whitefield, JP Nagar..."
-        className="w-full px-4 py-3 font-mono text-[14px] bg-bone border-2 border-ink focus:outline-none focus:border-vermillion transition-colors"
+        className="w-full px-4 py-3 font-mono text-[14px] bg-bone border-2 border-ink focus:outline-none focus:border-vermillion transition-all placeholder:text-graphite/50"
         aria-label="Search for your ward"
         aria-expanded={isOpen}
         aria-haspopup="listbox"
@@ -88,7 +88,7 @@ function WardLookup({ onSelect }: { onSelect: (wardId: string) => void }) {
             initial={{ opacity: 0, y: -10 }}
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -10 }}
-            className="absolute top-full left-0 right-0 bg-bone border border-ink border-t-0 max-h-64 overflow-y-auto z-10"
+            className="absolute top-full left-0 right-0 bg-bone border-2 border-ink border-t-0 max-h-64 overflow-y-auto z-10"
             role="listbox"
           >
             {filteredWards.map((ward) => {
@@ -97,7 +97,7 @@ function WardLookup({ onSelect }: { onSelect: (wardId: string) => void }) {
                 <li key={ward.id}>
                   <button
                     onClick={() => handleSelect(ward)}
-                    className="w-full px-4 py-3 text-left hover:bg-ink/5 transition-colors flex items-center justify-between"
+                    className="w-full px-4 py-3 text-left hover:bg-vermillion/[0.05] hover:border-l-2 hover:border-vermillion transition-all flex items-center justify-between border-b border-ink/10"
                     role="option"
                     aria-label={`Select ${ward.name}`}
                   >
@@ -261,9 +261,9 @@ function RiskCard({ wardId }: { wardId: string }) {
           {interventions.map((int) => (
             <div
               key={int.id}
-              className="flex items-center justify-between py-2"
+              className="flex items-center justify-between py-2 border-b border-ink/10 hover:bg-ink/[0.02] transition-colors"
             >
-              <span className="font-accent italic text-[12px]">
+              <span className="font-accent italic text-[13px]">
                 {int.type_id === "trees"
                   ? `${int.quantity} trees planted`
                   : int.type_id === "cool_roof"
@@ -287,12 +287,14 @@ function RiskCard({ wardId }: { wardId: string }) {
       )}
       {interventions.length === 0 && (
         <div className="mt-4 pt-4 border-t border-ink/20">
-          <p className="font-mono text-[10px] uppercase text-graphite mb-1">
+          <p className="font-mono text-[10px] uppercase text-graphite mb-3">
             INTERVENTIONS IN YOUR WARD
           </p>
-          <p className="font-serif font-black italic text-[16px] text-ink/30 mt-2">
-            No interventions logged for this ward.
-          </p>
+          <div className="py-8 pl-4">
+            <p className="font-serif font-black italic text-xl text-ink/30 leading-tight max-w-xs">
+              No interventions logged for this ward.
+            </p>
+          </div>
         </div>
       )}
     </motion.div>
@@ -341,14 +343,12 @@ export default function CitizenPage() {
                     initial={{ opacity: 0 }}
                     animate={{ opacity: 1 }}
                     exit={{ opacity: 0 }}
-                    className="py-16 pl-0 pr-8"
+                    className="py-20 pl-8 pr-0"
                   >
-                    <p className="font-serif font-black italic text-2xl text-ink/30 leading-tight">
-                      Select a ward to view
-                      <br />
-                      heat risk
+                    <p className="font-serif font-black italic text-3xl text-ink/30 leading-tight max-w-xs">
+                      Select a ward to view heat risk
                     </p>
-                    <p className="font-accent italic text-[12px] text-graphite mt-3">
+                    <p className="font-accent italic text-[13px] text-graphite mt-4 max-w-xs">
                       Enter an area name above or click the map.
                     </p>
                   </motion.div>

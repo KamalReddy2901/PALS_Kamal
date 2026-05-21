@@ -46,41 +46,39 @@ export function CausalBreakdown({ metrics, className = '' }: CausalBreakdownProp
   
   return (
     <div className={className}>
-      {/* Horizontal stacked bar with vertical label */}
-      <div className="relative mb-6">
-        <div className="flex items-start gap-3">
-          <div className="h-12 flex-1 flex border border-ink overflow-hidden">
-            {segments.map((segment, index) => (
-              <motion.div
-                key={segment.key}
-                className="h-full relative flex items-center justify-center"
-                style={{ 
-                  backgroundColor: index === 0 ? '#E84E1B' : 
-                    index === 1 ? '#F17A4D' :
-                    index === 2 ? '#F5A67F' :
-                    index === 3 ? '#F9D2B1' : '#EDE6D3',
-                }}
-                initial={{ width: 0 }}
-                animate={{ width: `${segment.value}%` }}
-                transition={{ 
-                  duration: 0.6, 
-                  delay: index * 0.1,
-                  ease: [0.16, 1, 0.3, 1]
-                }}
-              >
-                {segment.value >= 10 && (
-                  <span className={`font-mono text-[11px] font-medium ${index < 2 ? 'text-bone' : 'text-ink'}`}>
-                    {segment.value}%
-                  </span>
-                )}
-              </motion.div>
-            ))}
-          </div>
+      {/* Oversized horizontal stacked bar - BLEEDS dramatically past right edge */}
+      <div className="relative -mr-12 mb-6 overflow-visible">
+        <div className="h-16 flex border-2 border-ink overflow-visible relative">
+          {segments.map((segment, index) => (
+            <motion.div
+              key={segment.key}
+              className="h-full relative flex items-center justify-center"
+              style={{ 
+                backgroundColor: index === 0 ? '#E84E1B' : 
+                  index === 1 ? '#F17A4D' :
+                  index === 2 ? '#F5A67F' :
+                  index === 3 ? '#F9D2B1' : '#EDE6D3',
+              }}
+              initial={{ width: 0 }}
+              animate={{ width: `${segment.value}%` }}
+              transition={{ 
+                duration: 0.6, 
+                delay: index * 0.1,
+                ease: [0.16, 1, 0.3, 1]
+              }}
+            >
+              {segment.value >= 10 && (
+                <span className={`font-mono text-[12px] font-medium ${index < 2 ? 'text-bone' : 'text-ink'}`}>
+                  {segment.value}%
+                </span>
+              )}
+            </motion.div>
+          ))}
           
-          {/* Vertical label beside the bar */}
-          <div className="h-12 flex items-center">
+          {/* Vertical Fraunces labels AGAINST the bar segments */}
+          <div className="absolute -right-8 top-0 bottom-0 flex items-center">
             <span 
-              className="font-serif font-black text-xl uppercase tracking-tight text-ink"
+              className="font-serif font-black text-2xl uppercase tracking-tight text-ink"
               style={{ writingMode: 'vertical-rl', transform: 'rotate(180deg)' }}
             >
               CAUSE

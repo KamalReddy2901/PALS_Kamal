@@ -100,8 +100,8 @@ function PriorityCard({
         layout: { type: 'spring', stiffness: 500, damping: 30 },
         opacity: { duration: 0.2 }
       }}
-      className={`border-b border-ink/20 py-4 cursor-pointer transition-colors ${
-        isSelected ? 'bg-ink/5' : 'hover:bg-ink/[0.02]'
+      className={`border-b-2 border-ink/20 py-4 cursor-pointer transition-all ${
+        isSelected ? 'bg-ink/5 border-vermillion' : 'hover:bg-ink/[0.02] hover:border-ink/40'
       }`}
       onClick={onSelect}
       role="button"
@@ -115,25 +115,21 @@ function PriorityCard({
       }}
     >
       <div className="flex items-start gap-4">
-        {/* Rank number - large stamp style */}
-        <div className="flex-shrink-0 w-12">
-          <motion.span
-            key={rank}
-            initial={{ scale: 1.02 }}
-            animate={{ scale: 1 }}
-            transition={{ duration: 0.22, ease: 'easeOut' }}
-            className={`font-serif font-black text-4xl leading-none ${
+        {/* Rank number - large stamp style with Mercury Tick */}
+        <div className="flex-shrink-0 w-14">
+          <span
+            className={`font-serif font-black text-5xl leading-none block ${
               rank === 1 ? 'text-vermillion' : 'text-ink'
             }`}
           >
-            {String(rank).padStart(2, '0')}
-          </motion.span>
+            <MercuryTick value={rank} decimals={0} />
+          </span>
         </div>
         
         {/* Ward info */}
         <div className="flex-1 min-w-0">
           <div className="flex items-baseline justify-between gap-2 mb-2">
-            <h4 className="font-mono text-[13px] font-medium uppercase truncate">
+            <h4 className="font-mono text-[14px] font-medium uppercase truncate">
               {wardName}
             </h4>
             <span className="font-mono text-[11px] text-graphite flex-shrink-0">
@@ -154,8 +150,8 @@ function PriorityCard({
             <MiniSparkline values={sparklineData} />
           </div>
           
-          <div className="mt-2 flex items-center justify-between">
-            <span className="font-accent italic text-[11px] text-graphite">
+          <div className="mt-3 flex items-center justify-between">
+            <span className="font-accent italic text-[12px] text-graphite">
               ROI potential: {roiPotential.toFixed(1)}
             </span>
             <Link

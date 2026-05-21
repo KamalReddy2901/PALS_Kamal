@@ -94,7 +94,7 @@ function MapLegend({ lens }: { lens: MapLens }) {
   const label = labels[lens]
   
   return (
-    <div className="absolute bottom-4 left-4 z-[1000] bg-bone border border-ink p-3">
+    <div className="absolute bottom-4 left-4 z-[1000] bg-bone border-2 border-ink p-3">
       <p className="font-mono text-[9px] uppercase tracking-wide text-graphite mb-2">
         {label.title}
       </p>
@@ -124,7 +124,7 @@ function LensSelector() {
   ]
   
   return (
-    <div className="absolute top-4 left-4 z-[1000] bg-bone border border-ink p-2">
+    <div className="absolute top-4 left-4 z-[1000] bg-bone border-2 border-ink p-2">
       <p className="font-mono text-[9px] uppercase tracking-wide text-graphite mb-2">
         MAP LENS
       </p>
@@ -133,10 +133,10 @@ function LensSelector() {
           <button
             key={lens.id}
             onClick={() => setMapLens(lens.id)}
-            className={`px-2 py-1 font-mono text-[10px] uppercase border transition-colors ${
+            className={`px-2 py-1 font-mono text-[10px] uppercase border-2 transition-all ${
               mapLens === lens.id
                 ? 'bg-ink text-bone border-ink'
-                : 'bg-bone text-ink border-ink/30 hover:border-ink'
+                : 'bg-bone text-ink border-ink/30 hover:border-ink hover:bg-ink/5'
             }`}
             aria-label={`Switch to ${lens.label} view`}
             aria-pressed={mapLens === lens.id}
