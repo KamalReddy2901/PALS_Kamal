@@ -26,7 +26,7 @@ const ChoroplethMap = dynamic(
   {
     ssr: false,
     loading: () => (
-      <div className="h-full bg-bone border border-ink flex items-center justify-center">
+      <div className="h-full bg-bone border-2 border-ink flex items-center justify-center">
         <p className="font-mono text-[13px] text-graphite">
           AWAITING TELEMETRY<span className="animate-pulse">█</span>
         </p>

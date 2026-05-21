@@ -335,7 +335,7 @@ export function InterventionSimulator({
           <p className="font-mono text-[10px] uppercase text-graphite mb-3">
             3-YEAR TEMPERATURE PROJECTION
           </p>
-          <div className="relative h-32 border border-ink bg-bone/50">
+          <div className="relative h-32 border-2 border-ink bg-bone/50">
             <svg className="w-full h-full" viewBox="0 0 400 120" preserveAspectRatio="none">
               {/* Grid lines */}
               <line x1="0" y1="30" x2="400" y2="30" stroke="#1A1A1A" strokeWidth="0.5" opacity="0.2" />

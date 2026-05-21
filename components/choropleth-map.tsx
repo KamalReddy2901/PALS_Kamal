@@ -245,7 +245,7 @@ export function ChoroplethMap({ onWardClick, className = '' }: ChoroplethMapProp
   
   if (!isMounted) {
     return (
-      <div className={`bg-bone border border-ink flex items-center justify-center ${className}`}>
+      <div className={`bg-bone border-2 border-ink flex items-center justify-center ${className}`}>
         <p className="font-mono text-[13px] text-graphite">
           AWAITING TELEMETRY<span className="animate-pulse">█</span>
         </p>
@@ -266,7 +266,7 @@ export function ChoroplethMap({ onWardClick, className = '' }: ChoroplethMapProp
         style={{ height: '100%', width: '100%' }}
         zoomControl={true}
         attributionControl={true}
-        className="border border-ink"
+        className="border-2 border-ink"
       >
         <TileLayer
           url="https://{s}.basemaps.cartocdn.com/light_nolabels/{z}/{x}/{y}{r}.png"

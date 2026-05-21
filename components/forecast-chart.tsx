@@ -47,7 +47,7 @@ function CustomTooltip({
   });
 
   return (
-    <div className="bg-bone border border-ink p-3 font-mono text-[11px]">
+    <div className="bg-bone border-2 border-ink p-3 font-mono text-[11px]">
       <p className="text-graphite mb-1">
         {dateStr} · {timeStr}
       </p>
