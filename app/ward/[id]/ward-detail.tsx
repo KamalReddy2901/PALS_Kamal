@@ -20,9 +20,9 @@ import {
   getWardMetrics,
   getWardForecast,
   getWardVulnerability,
-  getWardInterventions,
   getRiskBand,
 } from "@/lib/data";
+import { useAppStore } from "@/lib/store";
 
 interface WardPageProps {
   params: Promise<{ id: string }>;
@@ -36,7 +36,9 @@ export default function WardPage({ params }: WardPageProps) {
   const metrics = getWardMetrics(id);
   const forecast = getWardForecast(id);
   const vulnerability = getWardVulnerability(id);
-  const interventions = getWardInterventions(id);
+  // Read from store so newly saved interventions appear immediately
+  const storeInterventions = useAppStore((s) => s.interventions);
+  const interventions = storeInterventions.filter((i) => i.ward_id === id);
 
   const handleDeltaChange = useCallback((delta: number) => {
     setInterventionDelta(delta);

@@ -1,5 +1,8 @@
 // Server Component — owns generateStaticParams for static export.
 // The actual UI lives in ward-detail.tsx ('use client').
+// Suspense is required because ward-detail uses use(params) to unwrap
+// the async params Promise — without a boundary React emits a console error.
+import { Suspense } from "react";
 import { wards } from "@/lib/data";
 import WardDetail from "./ward-detail";
 
@@ -12,5 +15,9 @@ export default function WardPage({
 }: {
   params: Promise<{ id: string }>;
 }) {
-  return <WardDetail params={params} />;
+  return (
+    <Suspense fallback={null}>
+      <WardDetail params={params} />
+    </Suspense>
+  );
 }

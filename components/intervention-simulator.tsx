@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useCallback, useState } from "react";
-import { useRouter } from "next/navigation";
+import Link from "next/link";
 import { motion } from "framer-motion";
 import { useAppStore } from "@/lib/store";
 import {
@@ -94,7 +94,6 @@ export function InterventionSimulator({
     canUndo,
     canRedo,
     addIntervention,
-    interventions,
   } = useAppStore();
 
   const [saved, setSaved] = useState<string | null>(null);
@@ -310,14 +309,23 @@ export function InterventionSimulator({
           SAVE TO INTERVENTIONS TRACKER →
         </button>
         {saved && (
-          <motion.span
+          <motion.div
             initial={{ opacity: 0, x: 10 }}
             animate={{ opacity: 1, x: 0 }}
             exit={{ opacity: 0 }}
-            className="font-mono text-[11px] text-vermillion uppercase"
+            className="flex items-center gap-3"
           >
-            SAVED — {saved}
-          </motion.span>
+            <span className="font-mono text-[11px] text-vermillion uppercase">
+              ✓ SAVED — {saved}
+            </span>
+            <Link
+              href="/interventions"
+              className="font-mono text-[10px] uppercase text-ink border-b border-ink hover:text-vermillion hover:border-vermillion transition-colors"
+              aria-label="View all interventions in the tracker"
+            >
+              VIEW TRACKER →
+            </Link>
+          </motion.div>
         )}
       </div>
 

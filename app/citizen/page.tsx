@@ -13,10 +13,8 @@ import {
 import { MercuryTick } from "@/components/mercury-tick";
 import {
   wards,
-  wardMetrics,
   getWardMetrics,
   getWardForecast,
-  getWardInterventions,
   getRiskBand,
   type Ward,
 } from "@/lib/data";
@@ -73,11 +71,14 @@ function WardLookup({ onSelect }: { onSelect: (wardId: string) => void }) {
           setIsOpen(true);
         }}
         onFocus={() => setIsOpen(true)}
+        onBlur={() => setTimeout(() => setIsOpen(false), 150)}
         placeholder="e.g., Koramangala, Whitefield, JP Nagar..."
         className="w-full px-4 py-3 font-mono text-[14px] bg-bone border-2 border-ink focus:outline-none focus:border-vermillion transition-colors"
         aria-label="Search for your ward"
         aria-expanded={isOpen}
+        aria-haspopup="listbox"
         aria-controls="ward-suggestions"
+        role="combobox"
       />
 
       <AnimatePresence>
@@ -124,7 +125,9 @@ function RiskCard({ wardId }: { wardId: string }) {
   const ward = wards.find((w) => w.id === wardId);
   const metrics = getWardMetrics(wardId);
   const forecast = getWardForecast(wardId);
-  const interventions = getWardInterventions(wardId);
+  // Use store so newly-logged interventions appear here too
+  const storeInterventions = useAppStore((s) => s.interventions);
+  const interventions = storeInterventions.filter((i) => i.ward_id === wardId);
 
   if (!ward || !metrics || !forecast) return null;
 
