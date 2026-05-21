@@ -46,41 +46,46 @@ export function CausalBreakdown({ metrics, className = '' }: CausalBreakdownProp
   
   return (
     <div className={className}>
-      {/* Oversized horizontal stacked bar - bleeds past grid */}
-      <div className="relative -mr-8 mb-6">
-        <div className="h-12 flex border border-ink overflow-hidden">
-          {segments.map((segment, index) => (
-            <motion.div
-              key={segment.key}
-              className="h-full relative flex items-center justify-center"
-              style={{ 
-                backgroundColor: index === 0 ? '#E84E1B' : 
-                  index === 1 ? '#F17A4D' :
-                  index === 2 ? '#F5A67F' :
-                  index === 3 ? '#F9D2B1' : '#EDE6D3',
-              }}
-              initial={{ width: 0 }}
-              animate={{ width: `${segment.value}%` }}
-              transition={{ 
-                duration: 0.6, 
-                delay: index * 0.1,
-                ease: [0.16, 1, 0.3, 1]
-              }}
+      {/* Horizontal stacked bar with vertical label */}
+      <div className="relative mb-6">
+        <div className="flex items-start gap-3">
+          <div className="h-12 flex-1 flex border border-ink overflow-hidden">
+            {segments.map((segment, index) => (
+              <motion.div
+                key={segment.key}
+                className="h-full relative flex items-center justify-center"
+                style={{ 
+                  backgroundColor: index === 0 ? '#E84E1B' : 
+                    index === 1 ? '#F17A4D' :
+                    index === 2 ? '#F5A67F' :
+                    index === 3 ? '#F9D2B1' : '#EDE6D3',
+                }}
+                initial={{ width: 0 }}
+                animate={{ width: `${segment.value}%` }}
+                transition={{ 
+                  duration: 0.6, 
+                  delay: index * 0.1,
+                  ease: [0.16, 1, 0.3, 1]
+                }}
+              >
+                {segment.value >= 10 && (
+                  <span className={`font-mono text-[11px] font-medium ${index < 2 ? 'text-bone' : 'text-ink'}`}>
+                    {segment.value}%
+                  </span>
+                )}
+              </motion.div>
+            ))}
+          </div>
+          
+          {/* Vertical label beside the bar */}
+          <div className="h-12 flex items-center">
+            <span 
+              className="font-serif font-black text-xl uppercase tracking-tight text-ink"
+              style={{ writingMode: 'vertical-rl', transform: 'rotate(180deg)' }}
             >
-              {segment.value >= 10 && (
-                <span className={`font-mono text-[11px] font-medium ${index < 2 ? 'text-bone' : 'text-ink'}`}>
-                  {segment.value}%
-                </span>
-              )}
-            </motion.div>
-          ))}
-        </div>
-        
-        {/* Vertical labels along the bar */}
-        <div className="absolute -top-1 -right-6 h-14 flex items-start">
-          <span className="font-serif font-black text-xl uppercase tracking-tight text-ink writing-mode-vertical transform rotate-180">
-            CAUSE
-          </span>
+              CAUSE
+            </span>
+          </div>
         </div>
       </div>
       

@@ -329,6 +329,67 @@ export function InterventionSimulator({
         )}
       </div>
 
+      {/* 3-Year Temperature Projection Curve */}
+      {effect.predicted_delta_c > 0 && (
+        <div className="mt-6 pt-4 border-t border-ink/20">
+          <p className="font-mono text-[10px] uppercase text-graphite mb-3">
+            3-YEAR TEMPERATURE PROJECTION
+          </p>
+          <div className="relative h-32 border border-ink bg-bone/50">
+            <svg className="w-full h-full" viewBox="0 0 400 120" preserveAspectRatio="none">
+              {/* Grid lines */}
+              <line x1="0" y1="30" x2="400" y2="30" stroke="#1A1A1A" strokeWidth="0.5" opacity="0.2" />
+              <line x1="0" y1="60" x2="400" y2="60" stroke="#1A1A1A" strokeWidth="0.5" opacity="0.2" />
+              <line x1="0" y1="90" x2="400" y2="90" stroke="#1A1A1A" strokeWidth="0.5" opacity="0.2" />
+              
+              {/* Baseline (current temperature) */}
+              <line x1="0" y1="20" x2="400" y2="20" stroke="#1A1A1A" strokeWidth="1" strokeDasharray="4 2" />
+              
+              {/* Cooling curve - exponential decay to target */}
+              <motion.path
+                d={`M 0 20 Q 100 20, 200 ${20 + (effect.predicted_delta_c * 15)} T 400 ${20 + (effect.predicted_delta_c * 15)}`}
+                fill="none"
+                stroke="#E84E1B"
+                strokeWidth="2"
+                initial={{ pathLength: 0 }}
+                animate={{ pathLength: 1 }}
+                transition={{ duration: 1.5, ease: "easeOut" }}
+              />
+              
+              {/* Target line */}
+              <line 
+                x1="0" 
+                y1={20 + (effect.predicted_delta_c * 15)} 
+                x2="400" 
+                y2={20 + (effect.predicted_delta_c * 15)} 
+                stroke="#E84E1B" 
+                strokeWidth="1" 
+                strokeDasharray="4 2" 
+                opacity="0.5"
+              />
+            </svg>
+            
+            {/* Y-axis labels */}
+            <div className="absolute left-0 top-0 bottom-0 w-12 flex flex-col justify-between py-2 text-right pr-2">
+              <span className="font-mono text-[9px] text-graphite">NOW</span>
+              <span className="font-mono text-[9px] text-vermillion">
+                −{effect.predicted_delta_c.toFixed(1)}°C
+              </span>
+            </div>
+            
+            {/* X-axis labels */}
+            <div className="absolute bottom-0 left-12 right-0 flex justify-between px-2 pb-1">
+              <span className="font-mono text-[9px] text-graphite">Y1</span>
+              <span className="font-mono text-[9px] text-graphite">Y2</span>
+              <span className="font-mono text-[9px] text-graphite">Y3</span>
+            </div>
+          </div>
+          <p className="font-accent italic text-[10px] text-graphite mt-2">
+            Projected cooling effect over 36 months, accounting for intervention maturation time
+          </p>
+        </div>
+      )}
+      
       {/* Time to effect breakdown */}
       <div className="mt-6 pt-4 border-t border-ink/20">
         <p className="font-mono text-[10px] uppercase text-graphite mb-3">
